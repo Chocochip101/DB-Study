@@ -35,12 +35,12 @@
 
 ## 📁 Repository 폴더 구조
 ```
-{Github ID}/database-basics/{File name}.md
+/database-basics/{Github ID}/{File name}.md
 ```
 
 - 💡 예시:
-- `Chocochip101/database-basics/Chapter01.md`
-- `Chocochip101/database-basics/transaction.md`
+- `/database-basics/Chocochip101/Chapter01.md`
+- `/database-basics/Chocochip101/transaction.md`
 
 <br/>
 
