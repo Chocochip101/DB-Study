@@ -41,7 +41,7 @@
 
 - 💡 예시:
 - `/database-basics/Chocochip101/Chapter01.md`
-- `/database-basics/Chocochip101/transaction.md`
+- `/real-my-sql/Chocochip101/transaction.md`
 
 <br/>
 
