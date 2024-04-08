@@ -5,7 +5,8 @@
 |회차|일정|책|진도|주내용|
 |---|---|---|---|---|
 |1|2024.03.18|데이터베이스 개론과 실습|Chap2|무결성 제약조건, 키, 관계대수, 뷰, 인덱스|
-|2|TBD|데이터베이스 개론과 실습|Chap4|정규화, 트랜잭션|
+|2|2024.03.27|데이터베이스 개론과 실습|Chap4|정규화, 트랜잭션, 락|
+|3|TBD|Real MySQL 8.0 (1권)|04 장|아키텍처|
 
 <br/>
 
@@ -35,12 +36,12 @@
 
 ## 📁 Repository 폴더 구조
 ```
-{Github ID}/database-basics/{File name}.md
+/database-basics/{Github ID}/{File name}.md
 ```
 
 - 💡 예시:
-- `Chocochip101/database-basics/Chapter01.md`
-- `Chocochip101/database-basics/transaction.md`
+- `/database-basics/Chocochip101/Chapter01.md`
+- `/real-my-sql/Chocochip101/transaction.md`
 
 <br/>
 
