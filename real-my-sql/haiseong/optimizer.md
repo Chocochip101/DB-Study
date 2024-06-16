@@ -234,3 +234,42 @@
         ```
     - 다음 테이블에서 중복 체크를 하면서 INSERT 또는 UPDATE를 실행해 별도의 정렬 없이 GROUP BY가 처리된다.
     - 하지만 GROUP BY와 ORDER BY가 같이 사용되면 명시적으로 정렬 작업을 수행한다.
+
+### DISTINCT 처리
+
+- SELECT DISTINCT ...
+    - SELECT 되는 레코드 중에서 유니크한 레코드만 가져오고자 한다면 SELECT DISTINCT를 사용한다.
+    - 이것은 GROUP BY 처럼 동작한다.
+    - `SELECT DISTINCT(first_name), last_name ...` 이런 쿼리를 날려도 first_name에만 유니크한 값이 적용되는게 아니라 (first_name, last_name) 조합중 유니크한 값을 조회한다.
+- 집합 함수와 함께 사용된 DISTINCT
+    - COUNT(), MIN(), MAX() 같은 집합함수 내에서 DISTINCT를 쓰면 SELECT DISTINCT와 다르게 해석된다.
+    - 집합 함수 내에서 사용된 DISTINCT는 그 집합 함수의 인자로 전달된 유니크한 것들을 가져온다.
+    - DISTINCT 처리가 인덱스를 사용하지 못하면 항상 임시테이블이 필요하지만 실행계획에는 Using temporary가 표시되지 않는다.
+        - 레코드 건수가 많아지면 상당히 느려질 수 있다.
+
+### 내부 임시 테이블 활용
+
+- MYSQL 엔진이 스토리지 엔진으로부터 받아온 레코드를 정렬하거나 그루핑 할때는 내부적인 임시 테이블을 사용한다.
+    - `CREATE TEMPORARY TABLE` 명령으로 만든 임시테이블과는 다르다.
+- 메모리에 생성되었다가 테이블의 크기가 커지면 디스크로 옮겨진다.
+- 다른 세션이나 다른 쿼리에서는 볼 수 없고 사용하는 것도 불가능 하다.
+- 쿼리 처리가 완료되면 자동으로 삭제된다.
+
+메모리 임시 테이블과 디스크 임시 테이블
+- 8.0 이전에는 임시 테이블이 메모리를 사용할때 MEMORY 스토리지 엔진을, 디스크에 저장될 때는 MyISAM 스토리지 엔진을 이용한다.
+    - MEMORY 스토리지 엔진은 가변 길이 타입을 지원하지 않음 -> 최대 길이 만큼 메모리를 할당해서 사용
+    - MyISAM 스토리지 엔진은 트렌젝션을 지원하지 않음
+- 8.0 부터는 메모리에서 TempTable 이라는 스토리지 엔진을, 디스크에서 InnoDB 스토리지 엔진을 사용한다.
+    - TempTable는 가변 길이 타입 지원
+    - InnoDB는 트렌젝션 지원
+
+임시 테이블이 필요한 쿼리
+- Using temporary 메시지가 표시됨
+    - ORDER BY와 GROUP BY에 명시된 칼럼이 다른 쿼리
+    - ORDER BY나 GROUP BY에 명시된 칼럼이 조인의 순서상 첫번째 테이블이 아닌 쿼리
+- Using temporary 메시지가 표시되지 않음
+    - DISTINCT와 ORDER BY가 동시에 쿼리에 존재하는 경우 또는 DISTINCT가 인덱스로 처리되지 못하는 쿼리
+    - UNION이나 UNION DISTINCT가 사용된 쿼리
+    - 쿼리의 실행 계획에서 select_type이 DERIVED인 쿼리
+
+- 마지막을 제외하고 유니크 인덱스를 가지는 임시 테이블이 생성된다. -> 성능 매우 느림
