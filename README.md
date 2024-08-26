@@ -15,7 +15,8 @@
 |9|2024.06.03|Real MySQL 8.0 (1권)|08 장|옵티마이저와 힌트|
 |10|2024.08.10|Real MySQL 8.0 (2권)|11 장|쿼리 작성과 연관된 시스템 변수|
 |11|2024.08.26|Real MySQL 8.0 (2권)|11 장|SELECT 쿼리 최적화|
-|12|TBD|Real MySQL 8.0 (2권)|11 장|INSERT, UPDATE, DELETE 쿼리 최적화|
+|12|2024.08.26|Real MySQL 8.0 (2권)|11 장|INSERT 쿼리 최적화|
+|13|TBD|Real MySQL 8.0 (2권)|11장|UPDATE, DELETE|
 
 <br/>
 
