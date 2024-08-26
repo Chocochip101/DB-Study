@@ -13,7 +13,7 @@ SQL은 어떤 데이터를 요청하기 위한 언어일 뿐, 어떻게 데이�
 SELECT * FROM tab_test WHERE number_column='10001';
 SELECT * FROM tab_test WHERE string_column=10001;
 ```
-
+ 
 위 쿼리와 같이 두 비교 대상이 문자열과 숫자 타입으로 다를 때는 자동으로 타입 변환이 발생한다.
 MySQL은 숫자 타입과 문자열 타입 간의 비교에서 숫자 타입을 우선시하므로 문자열 값을 숫자 값으로 변환한 후 비교를 수행한다.
   
